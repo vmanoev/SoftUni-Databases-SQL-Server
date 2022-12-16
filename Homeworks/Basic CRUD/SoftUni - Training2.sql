@@ -1,4 +1,3 @@
-
 SELECT FirstName + ' ' + LastName FROM Employees AS [FullName]
 SELECT CONCAT(FirstName, ' ', LastName) FROM Employees
 SELECT CONCAT_WS(' ', FirstName, LastName) FROM Employees
