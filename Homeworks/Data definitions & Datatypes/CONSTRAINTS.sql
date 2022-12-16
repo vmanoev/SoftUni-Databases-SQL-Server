@@ -1,0 +1,35 @@
+ALTER TABLE RentalOrders
+ADD CONSTRAINT CK_TotalDays CHECK(DATEDIFF(DAY, StartDate, EndDate) = TotalDays);
+
+ALTER TABLE Payments
+ADD CONSTRAINT CK_TaxAmount CHECK(TaxAmount = TotalDays * TaxRate);
+
+ALTER TABLE Users
+ADD CONSTRAINT PK_Users PRIMARY KEY(ID)
+
+
+ALTER TABLE Users
+DROP CONSTRAINT PK_Users;
+ALTER TABLE Users
+ADD CONSTRAINT PK_Users PRIMARY KEY(Id, Username);
+
+
+ALTER TABLE Users
+ADD CONSTRAINT CHK_Users_Password CHECK(LEN(Password) >= 5);
+
+
+ALTER TABLE Users
+ADD CONSTRAINT DF_Users DEFAULT GETDATE() FOR LastLoginTime;  
+
+ALTER TABLE Users
+ADD CONSTRAINT UC_Users UNIQUE(Username);
+
+ALTER TABLE Users
+ADD CONSTRAINT LEN_Username CHECK(LEN(Username) >=3);
+
+--Syntax EmployeeId INT NOT NULL FOREIGN KEY REFERENCES Employees(Id)
+
+UPDATE  Employees
+SET Salary *= 1.10;
+UPDATE Employees
+SET Salary += Salary * 0.10
